@@ -44,6 +44,10 @@ Open a GitHub issue with:
 - Steps to reproduce (for bugs)
 - Expected vs. actual behavior
 
+## Credits
+
+Maintainer contact: [mrzedd@outlook.sa](mailto:mrzedd@outlook.sa). This project is developed with [Replit](https://replit.com) (hosting & cloud IDE), [Replit Agent](https://docs.replit.com/category/replit-ai), and [Cursor](https://cursor.com). Live demo: [phi-sphere-ai-from-labs-last.replit.app](https://phi-sphere-ai-from-labs-last.replit.app).
+
 ## License
 
 By contributing, you agree that your contributions will be licensed under the MIT License.

@@ -8,7 +8,9 @@
 
 <p align="center">
   <strong>Microsoft Innovation Challenge — March 2026</strong><br/>
-  <sub>Multimodal lab notebook · Responsible AI · 8 Azure services</sub>
+  <sub>Multimodal lab notebook · Responsible AI · 8 Azure services</sub><br/><br/>
+  <a href="https://phi-sphere-ai-from-labs-last.replit.app"><strong>Live app (Replit)</strong></a>
+  — <code>phi-sphere-ai-from-labs-last.replit.app</code>
 </p>
 
 ---
@@ -604,6 +606,18 @@ PhiSphere applies responsible AI across the stack:
 - [Python OpenAI Demos](https://github.com/Azure-Samples/python-openai-demos) — Azure OpenAI Python samples
 - [Content Safety Studio](https://contentsafety.cognitive.azure.com/) — Azure AI Content Safety testing
 - [Responsible AI Toolbox](https://github.com/microsoft/responsible-ai-toolbox) — Microsoft RAI tools for fairness and explainability
+
+---
+
+## Contributors & acknowledgments
+
+| | |
+|:---|:---|
+| **Contact** | [mrzedd@outlook.sa](mailto:mrzedd@outlook.sa) |
+| **Live deployment** | [phi-sphere-ai-from-labs-last.replit.app](https://phi-sphere-ai-from-labs-last.replit.app) — hosted on [Replit](https://replit.com) |
+| **Replit** | Cloud IDE, deployment, and project hosting |
+| **Replit Agent** | AI-assisted development on Replit ([docs](https://docs.replit.com/category/replit-ai)) |
+| **Cursor** | AI-powered editor used for local development |
 
 ---
 

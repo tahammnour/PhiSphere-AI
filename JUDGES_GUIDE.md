@@ -45,3 +45,23 @@ explainable recommendations with strong safety controls.
 - Azure health checks: `artifacts/api-server/src/routes/azure-status.ts`
 - CSV quality warnings UI: `artifacts/phisphere-ai/src/components/chat/CsvPreviewCard.tsx`
 
+## 6) Detailed demo video storyboard (~3 minutes)
+
+Use this shot list when recording a submission or walkthrough video (same content previously in the main README):
+
+1. **Landing** — Branding, feature cards, pricing
+2. **Sign up & login** — Account creation → Control Panel
+3. **Control Panel** — Azure service status (green dots), resources, recent sessions
+4. **New session** — Domain: Biology; template: PCR Amplification
+5. **Sample CSV** — Plant Growth Sensor → statistics + chart
+6. **Chat** — Ask: *What trends do you see in temperature vs. growth? What should I try next?*
+7. **Response** — Structured format (Observation / Analysis / Next Steps / Why) + confidence badge
+8. **OpenML** — Import dataset #61 (iris)
+9. **Image** — Gel electrophoresis photo → Azure Vision analysis
+10. **PDF** — Protocol upload → RAG indexing + citation chips in follow-up chat
+11. **Safety** — Borderline dosing question → Content Safety + audit log
+12. **RAI panel** — Safety check, groundedness, reasoning trace
+13. **Metrics** — Safety pass rate, RAG usage, groundedness
+14. **Azure status** — All 8 services health
+15. **Export** — Download session as Markdown lab notebook
+

@@ -1,18 +1,21 @@
-# PhiSphere AI — Lab Notebook AI Assistant
+# PhiSphere AI — Lab Notebook Assistant
 
-> An agentic lab notebook assistant that helps researchers reason over experiments, analyze multimodal data, and safely suggest next steps — powered by Azure AI.
-
-Built for the **Microsoft Innovation Challenge — March 2026 Hackathon**.
+> **Agentic AI for experimental reasoning** — interpret protocols, analyze multimodal lab data (text, CSV, images, PDFs), and get **explainable**, **safety-gated** answers powered by **Azure AI**.
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/tahammnour/PhiSphere-AI/main/assets/phisphere-logo.png" alt="PhiSphere AI — sapphire-blue sphere mark and wordmark" width="520" />
 </p>
 
+<p align="center">
+  <strong>Microsoft Innovation Challenge — March 2026</strong><br/>
+  <sub>Multimodal lab notebook · Responsible AI · 8 Azure services</sub>
+</p>
+
 ---
 
-## Intro videos
+## 🎬 Intro videos
 
-Two short walkthroughs (files live in [`videos/`](videos/)). GitHub renders video best with **absolute** `raw.githubusercontent.com` URLs:
+Two short walkthroughs (files in [`videos/`](videos/)). On GitHub, playback uses **`raw.githubusercontent.com`** URLs:
 
 ### Intro 1
 
@@ -30,25 +33,27 @@ Two short walkthroughs (files live in [`videos/`](videos/)). GitHub renders vide
 
 **Also:** [Open `intro2.mp4` on GitHub](https://github.com/tahammnour/PhiSphere-AI/blob/main/videos/intro2.mp4) · [Raw file](https://raw.githubusercontent.com/tahammnour/PhiSphere-AI/main/videos/intro2.mp4)
 
-If the players above are empty, confirm you are on the **`main`** branch and that these files exist in the repo. Clone locally and open the MP4s in your player if needed.
+If the players above are empty, confirm you are on the **`main`** branch and that the MP4s are committed. You can also open them locally from the `videos/` folder.
 
 ---
 
-## Quick Links for Judges
+## 📎 Quick links
 
-- Fast project walkthrough: `JUDGES_GUIDE.md`
-- Final submission checks: `HACKATHON_SUBMISSION_CHECKLIST.md`
-- Backend docs: `artifacts/api-server/README.md`
-- Frontend docs: `artifacts/phisphere-ai/README.md`
-- API routes map: `artifacts/api-server/src/routes/README.md`
-- Shared libs map: `lib/README.md`
-- Notebooks guide: `notebooks/README.md`
+| | |
+|:---|:---|
+| Judges guide | [`JUDGES_GUIDE.md`](JUDGES_GUIDE.md) — quick evaluation path & **demo video storyboard** |
+| Submission | [`HACKATHON_SUBMISSION_CHECKLIST.md`](HACKATHON_SUBMISSION_CHECKLIST.md) |
+| Backend | [`artifacts/api-server/README.md`](artifacts/api-server/README.md) |
+| Frontend | [`artifacts/phisphere-ai/README.md`](artifacts/phisphere-ai/README.md) |
+| API routes | [`artifacts/api-server/src/routes/README.md`](artifacts/api-server/src/routes/README.md) |
+| Shared libs | [`lib/README.md`](lib/README.md) |
+| Notebooks | [`notebooks/README.md`](notebooks/README.md) |
 
 ---
 
-## Screenshots
+## 📸 Screenshots & diagrams
 
-### Architecture & diagrams (in repo — these render on GitHub)
+### Architecture assets (committed — render on GitHub)
 
 | Preview | Description |
 |--------|-------------|
@@ -56,9 +61,9 @@ If the players above are empty, confirm you are on the **`main`** branch and tha
 | ![Six architecture panels](https://raw.githubusercontent.com/tahammnour/PhiSphere-AI/main/screenshots/architecture-diagrams-collage.png) | **Six-panel collage** — High-level stack, RAG sequence, safety pipeline, document RAG, Azure map, multimodal inputs |
 | ![Drawing style guide](https://raw.githubusercontent.com/tahammnour/PhiSphere-AI/main/screenshots/architecture-drawing-style-guide.png) | **Style guide** — Layout, box colors, arrows, Azure palette (for draw.io / slides) |
 
-### UI captures (optional — add PNGs to `screenshots/` when you record the demo)
+### UI captures (optional)
 
-These filenames are **not** committed yet; add them to avoid broken images:
+Add these PNGs under `screenshots/` when you record the demo (filenames are suggestions):
 
 | Target file | What to capture |
 |---------------|-----------------|
@@ -82,17 +87,17 @@ These filenames are **not** committed yet; add them to avoid broken images:
 
 ---
 
-## Challenge
+## 🎯 Problem & challenge
 
-**Lab Notebook AI Assistant** — Researchers want help reasoning over experiments without replacing scientific judgment. PhiSphere AI interprets experimental protocols, suggests next-step variations, and analyzes results from text, CSVs, images, and PDFs — while clearly explaining *why* recommendations are made. The system enforces strong safety boundaries (especially in biological or clinical domains), applies content filtering, and avoids disallowed advisory behavior.
+**Lab Notebook AI Assistant** — Researchers need help reasoning over experiments **without** replacing scientific judgment. PhiSphere interprets protocols, **suggests next-step variations**, and analyzes **text, CSV, images, and PDFs — with explicit *why* behind every recommendation**. Strong **safety boundaries** (bio, clinical, lab, chemical), **content filtering**, and **no disallowed advisory** behavior.
 
 ---
 
-## Architecture
+## 🏗️ Architecture
 
-### Visual architecture (included in repo)
+### Visual overview (PNGs in repo)
 
-These PNGs are **better than placeholders** for judges and slides: they show the full multimodal stack, all eight Azure integrations, and safety-first flow. Mermaid diagrams below stay the editable “source of truth”; the images are for **at-a-glance** reading on GitHub.
+The diagrams below summarize the **multimodal stack**, **eight Azure integrations**, and **safety-first** flow. **Mermaid** blocks are the editable source of truth; **PNGs** are for slides and quick reading on GitHub.
 
 **System overview — PhiSphere AI Lab Assistant (multimodal + explainable AI)**
 
@@ -445,18 +450,20 @@ Use this to recreate the PhiSphere AI architecture in any drawing tool.
 
 ---
 
-## Judging Alignment
+## 🏆 Hackathon alignment
 
-| Criterion (25% each)         | How PhiSphere addresses it |
-|------------------------------|---------------------------|
-| **Performance**              | SSE streaming for sub-second first-token; rate limiting; health checks across all 7+ Azure services; metrics dashboard with latency, safety, and RAG usage stats |
-| **Innovation**               | Agentic reasoning pipeline (ingest → RAG → LLM → safety → audit); OpenML live dataset import; multimodal analysis (CSV, images, PDFs); 12 protocol templates; hypothesis generation; draft paper export |
-| **Breadth of Azure services** | Azure OpenAI, AI Vision, Content Safety, Document Intelligence, AI Search, AI Language, Application Insights, Azure ML (notebooks) — 8 services integrated |
-| **Responsible AI**           | Server-side safety buffer before streaming; domain-specific safety rules (bio, clinical, chemical, pharma, neuro); audit log with per-message safety metadata; groundedness scoring; confidence badges; RAI panel in UI; Responsible AI Toolbox notebooks for offline analysis |
+Typical judging dimensions (example — see your official rubric):
+
+| Dimension | How PhiSphere delivers |
+|-----------|------------------------|
+| **Performance** | SSE streaming, rate limiting, health checks across Azure services, metrics (latency, safety, RAG) |
+| **Innovation** | Ingest → RAG → LLM → safety → audit; OpenML import; multimodal (CSV, image, PDF); 12 protocol templates; hypothesis & draft paper |
+| **Azure breadth** | 8 services: OpenAI, Vision, Content Safety, Document Intelligence, AI Search, AI Language, App Insights, Azure ML |
+| **Responsible AI** | Buffered responses, domain rules, audit log, groundedness, confidence UI, RAI Toolbox notebooks |
 
 ---
 
-## Repository Structure
+## 📁 Repository structure
 
 ```
 PhiSphere-AI-master/
@@ -490,24 +497,25 @@ PhiSphere-AI-master/
 
 ---
 
-## Key Features
+## ✨ Key features
 
-- **Structured AI reasoning** — Every response uses Observation → Analysis → Suggested Next Steps → Why I Recommend This format
-- **Multimodal data support** — CSV with auto-statistics and charts (Recharts), images with Azure Vision analysis, PDFs with Document Intelligence + RAG indexing
-- **OpenML dataset import** — Import any public dataset by ID directly from [OpenML](https://www.openml.org/) into a lab session
-- **12 protocol templates** — PCR, Western Blot, ELISA, Gel Electrophoresis, Cell Culture, Titration, Spectrophotometry, DNA Extraction, Microscopy, Centrifugation, pH Measurement, Chromatography
-- **RAG grounding** — PDF chunks indexed in Azure AI Search; top-3 results injected into LLM context with citations
-- **Entity extraction** — Azure AI Language extracts scientific entities (chemicals, genes, instruments) displayed as real-time chips
-- **Safety-first architecture** — All AI responses fully buffered server-side → Azure Content Safety screening → only then streamed to client
-- **Responsible AI panel** — Per-message confidence badge, safety status, reasoning trace, and data grounding indicators
-- **Audit log** — Complete safety event history with timestamps and category details
-- **Metrics dashboard** — Real-time usage and safety statistics (total messages, safety pass rate, RAG usage, average groundedness, response latency)
-- **Azure status panel** — Live health checks for all 8 Azure services with active count badge
-- **Demo experiments** — Three pre-built sessions: Plant Sensor Analysis, Acid-Base Titration, Gel Electrophoresis Image Analysis
+| | |
+|:---|:---|
+| **Structured reasoning** | Observation → Analysis → Next steps → **Why I recommend this** |
+| **Multimodal** | CSV + charts (Recharts), images (Vision), PDFs (Document Intelligence + RAG) |
+| **OpenML** | Import public datasets by ID ([OpenML](https://www.openml.org/)) into a session |
+| **Protocol templates** | 12 lab templates (PCR, Western Blot, ELISA, gel, cell culture, titration, spectrophotometry, DNA extraction, microscopy, centrifugation, pH, chromatography) |
+| **RAG** | PDF chunks in Azure AI Search; top-3 context + citations |
+| **Entities** | Azure AI Language — chemicals, genes, instruments as chips |
+| **Safety-first** | Full response buffered → **Content Safety** → then streamed |
+| **RAI UI** | Confidence, safety, groundedness, reasoning trace |
+| **Audit & metrics** | Safety events + usage / groundedness / latency stats |
+| **Azure status** | Live health for all 8 integrations |
+| **Demos** | Pre-built sessions (e.g. plant sensor, titration, gel image) |
 
 ---
 
-## Quick Start
+## 🚀 Quick start
 
 ### Prerequisites
 
@@ -550,29 +558,11 @@ Copy `.env.example` or set these in your environment / Replit Secrets:
 
 See [replit.md](replit.md) for the full environment variable reference.
 
----
-
-## Demo Script (3-minute video)
-
-1. **Landing page** — Show the PhiSphere branding, feature cards, and pricing
-2. **Sign up and login** — Create an account, enter the Control Panel
-3. **Control Panel** — Show Azure service status (green dots), resource links, recent sessions
-4. **Create a session** — Pick "Biology" domain, select the "PCR Amplification" protocol template
-5. **Load sample CSV** — Click "Plant Growth Sensor" dataset → show auto-generated statistics and chart
-6. **Ask the AI** — "What trends do you see in the temperature vs. growth data? What should I try next?"
-7. **Show the response** — Point out the structured format (Observation / Analysis / Next Steps / Why) and confidence badge
-8. **Import from OpenML** — Import dataset #61 (iris) to show live external data integration
-9. **Upload an image** — Upload a gel electrophoresis photo → show Azure Vision analysis
-10. **Upload a PDF** — Upload a protocol document → show RAG indexing and citation chips in follow-up chat
-11. **Safety demo** — Ask a borderline question about drug dosages → show Content Safety blocking + audit log entry
-12. **Responsible AI panel** — Expand the RAI panel to show safety check, groundedness score, reasoning trace
-13. **Metrics dashboard** — Show the evaluation summary: safety pass rate, RAG usage, groundedness scores
-14. **Azure status panel** — Show all 8 services with live health checks
-15. **Export** — Download the session as a markdown lab notebook
+> **Demo video & judging:** Step-by-step **3‑minute demo path** and the full **15‑shot video storyboard** live in [`JUDGES_GUIDE.md`](JUDGES_GUIDE.md) so this README stays focused on the product and setup. Use that file when recording or presenting.
 
 ---
 
-## Azure Services Integrated
+## ☁️ Azure services integrated
 
 | # | Service | Purpose |
 |---|---------|---------|
@@ -587,9 +577,9 @@ See [replit.md](replit.md) for the full environment variable reference.
 
 ---
 
-## Responsible AI
+## 🛡️ Responsible AI
 
-PhiSphere AI implements responsible AI principles at every layer:
+PhiSphere applies responsible AI across the stack:
 
 - **Safety-first streaming** — AI responses are fully buffered server-side; Azure Content Safety screens the complete text before any content reaches the client
 - **Domain-specific safety rules** — Hard-coded system prompt boundaries: no synthesis routes for pathogens, no clinical dosing, no explosive synthesis, mandatory BSL/IRB flags
@@ -602,7 +592,7 @@ PhiSphere AI implements responsible AI principles at every layer:
 
 ---
 
-## References & Resources
+## 📚 References
 
 - [OpenML](https://www.openml.org/) — Open machine learning dataset repository
 - [Kaggle Sensor Datasets](https://www.kaggle.com/datasets?search=sensor) — IoT and sensor data for lab experiments
@@ -613,7 +603,7 @@ PhiSphere AI implements responsible AI principles at every layer:
 
 ---
 
-## License
+## ⚖️ License
 
 **MIT** — Copyright (c) 2026 PhiSphere AI.
 

@@ -1,0 +1,40 @@
+import { Router, type IRouter } from "express";
+import healthRouter from "./health";
+import labSessionsRouter from "./lab-sessions";
+import openaiConversationsRouter from "./openai-conversations";
+import uploadsRouter from "./uploads";
+import azureStatusRouter from "./azure-status";
+import demoSeedRouter from "./demo-seed";
+import authRouter from "./auth";
+import exportRouter from "./export";
+import templatesRouter from "./templates";
+import auditRouter from "./audit";
+import billingRouter from "./billing";
+import feedbackRouter from "./feedback";
+import evaluationRouter from "./evaluation";
+import hypothesisRouter from "./hypothesis";
+import draftPaperRouter from "./draft-paper";
+import openmlRouter from "./openml";
+import metricsRouter from "./metrics";
+
+const router: IRouter = Router();
+
+router.use(healthRouter);
+router.use(authRouter);
+router.use(templatesRouter);
+router.use(labSessionsRouter);
+router.use(openaiConversationsRouter);
+router.use(uploadsRouter);
+router.use(azureStatusRouter);
+router.use(demoSeedRouter);
+router.use(exportRouter);
+router.use(auditRouter);
+router.use(billingRouter);
+router.use(feedbackRouter);
+router.use(evaluationRouter);
+router.use(hypothesisRouter);
+router.use(draftPaperRouter);
+router.use(openmlRouter);
+router.use(metricsRouter);
+
+export default router;

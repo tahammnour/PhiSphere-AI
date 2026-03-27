@@ -1,0 +1,1438 @@
+openapi: 3.1.0
+info:
+  # Do not change the title, if the title changes, the import paths will be broken
+  title: Api
+  version: 0.1.0
+  description: PhiSphere AI Lab Notebook API
+servers:
+  - url: /api
+    description: Base API path
+tags:
+  - name: health
+    description: Health operations
+  - name: lab-sessions
+    description: Lab session (experiment notebook) operations
+  - name: openai
+    description: OpenAI AI chat operations
+  - name: uploads
+    description: File upload and sample data operations
+  - name: azure
+    description: Azure service status and health operations
+  - name: evaluation
+    description: Evaluation and responsible AI metrics endpoints
+  - name: audit
+    description: Audit log operations for safety and groundedness events
+  - name: templates
+    description: Protocol template operations
+paths:
+  /lab-sessions/templates:
+    get:
+      operationId: listTemplates
+      tags: [templates]
+      summary: List all protocol templates
+      description: Returns all available scientific protocol templates with starter prompts for session initialization.
+      responses:
+        "200":
+          description: List of protocol templates
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  templates:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/ProtocolTemplate"
+                required:
+                  - templates
+
+  /healthz:
+    get:
+      operationId: healthCheck
+      tags: [health]
+      summary: Health check
+      description: Returns server health status
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+
+  /lab-sessions:
+    get:
+      operationId: listLabSessions
+      tags: [lab-sessions]
+      summary: List all lab sessions
+      responses:
+        "200":
+          description: List of lab sessions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LabSession"
+    post:
+      operationId: createLabSession
+      tags: [lab-sessions]
+      summary: Create a new lab session
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateLabSessionBody"
+      responses:
+        "201":
+          description: Created lab session
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LabSession"
+
+  /lab-sessions/{id}:
+    get:
+      operationId: getLabSession
+      tags: [lab-sessions]
+      summary: Get a lab session
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Lab session
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LabSession"
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    delete:
+      operationId: deleteLabSession
+      tags: [lab-sessions]
+      summary: Delete a lab session
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /lab-sessions/{id}/upload:
+    post:
+      operationId: uploadLabSessionFile
+      tags: [uploads]
+      summary: Upload a CSV or image file to the lab session
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+              required:
+                - file
+      responses:
+        "200":
+          description: Upload result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UploadResult"
+        "400":
+          description: Invalid file
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Session not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /lab-sessions/{id}/load-sample:
+    post:
+      operationId: loadSampleDataset
+      tags: [uploads]
+      summary: Load a pre-built sample dataset into a lab session
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoadSampleBody"
+      responses:
+        "200":
+          description: Loaded sample result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UploadResult"
+        "404":
+          description: Session or dataset not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /azure/status:
+    get:
+      operationId: getAzureStatus
+      tags: [azure]
+      summary: Get Azure service health status
+      description: Returns real-time health status of Azure Content Safety and Azure AI Vision services via live API pings.
+      responses:
+        "200":
+          description: Azure service health status
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AzureStatus"
+
+  /sample-datasets:
+    get:
+      operationId: listSampleDatasets
+      tags: [uploads]
+      summary: List available sample datasets
+      responses:
+        "200":
+          description: List of sample dataset metadata
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SampleDatasetMeta"
+
+  /openai/conversations:
+    get:
+      operationId: listOpenaiConversations
+      tags: [openai]
+      summary: List all conversations
+      responses:
+        "200":
+          description: List of conversations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/OpenaiConversation"
+    post:
+      operationId: createOpenaiConversation
+      tags: [openai]
+      summary: Create a new conversation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateOpenaiConversationBody"
+      responses:
+        "201":
+          description: Created conversation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OpenaiConversation"
+
+  /openai/conversations/{id}:
+    get:
+      operationId: getOpenaiConversation
+      tags: [openai]
+      summary: Get conversation with messages
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Conversation with messages
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OpenaiConversationWithMessages"
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OpenaiError"
+    delete:
+      operationId: deleteOpenaiConversation
+      tags: [openai]
+      summary: Delete a conversation
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OpenaiError"
+
+  /openai/conversations/{id}/messages:
+    get:
+      operationId: listOpenaiMessages
+      tags: [openai]
+      summary: List messages in a conversation
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: List of messages
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/OpenaiMessage"
+    post:
+      operationId: sendOpenaiMessage
+      tags: [openai]
+      summary: Send a text message and receive a streaming text response
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SendOpenaiMessageBody"
+      responses:
+        "200":
+          description: SSE stream of assistant text chunks
+          content:
+            text/event-stream: {}
+
+  /evaluation/summary:
+    get:
+      operationId: getEvaluationSummary
+      tags: [evaluation]
+      summary: Get aggregated evaluation summary across all sessions
+      description: Returns safety flag rates, groundedness averages, and message counts across all sessions.
+      responses:
+        "200":
+          description: Aggregated evaluation summary
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EvaluationSummary"
+
+  /evaluation/report:
+    get:
+      operationId: getEvaluationReport
+      tags: [evaluation]
+      summary: Get per-session evaluation report with per-message breakdown
+      parameters:
+        - name: sessionId
+          in: query
+          required: true
+          schema:
+            type: integer
+          description: Lab session ID to generate the report for
+      responses:
+        "200":
+          description: Session evaluation report
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EvaluationReport"
+        "400":
+          description: Missing or invalid sessionId
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Session not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /lab-sessions/{id}/draft-paper:
+    post:
+      operationId: draftLabSessionPaper
+      tags: [lab-sessions]
+      summary: Generate a research paper draft for a lab session
+      description: Uses Azure OpenAI to generate a publication-quality paper draft including Abstract, Materials & Methods, and a full paper outline (Introduction, Methods, Results, Discussion, Conclusion) based on session data and chat history.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Paper draft result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaperDraft"
+        "404":
+          description: Session not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: AI draft generation failed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /lab-sessions/{id}/analyze:
+    post:
+      operationId: analyzeLabSession
+      tags: [lab-sessions]
+      summary: Generate AI hypothesis analysis for a lab session
+      description: Uses Azure OpenAI to analyze the session's experimental data and generate key findings, testable hypotheses with confidence levels, and next experiment suggestions.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: AI analysis result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalysisResult"
+        "404":
+          description: Session not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: AI analysis failed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /lab-sessions/{id}/import-openml:
+    post:
+      operationId: importOpenmlDataset
+      tags: [uploads]
+      summary: Import a dataset from OpenML into a lab session
+      description: Fetches a dataset by ID from the OpenML public repository, converts to CSV if needed, and stores it as session experiment data with attribution.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                datasetId:
+                  type: integer
+                  description: OpenML dataset ID (e.g. 61 for Iris)
+              required:
+                - datasetId
+      responses:
+        "200":
+          description: Import result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UploadResult"
+        "400":
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Session not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "502":
+          description: OpenML API error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /openml/search:
+    get:
+      operationId: searchOpenmlDatasets
+      tags: [uploads]
+      summary: Search OpenML datasets by name
+      parameters:
+        - name: q
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Search query (dataset name)
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 10
+          description: Max results (max 25)
+      responses:
+        "200":
+          description: Search results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  datasets:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        rows:
+                          type: integer
+                        features:
+                          type: integer
+                        format:
+                          type: string
+                  message:
+                    type: string
+
+  /metrics/dashboard:
+    get:
+      operationId: getMetricsDashboard
+      tags: [evaluation]
+      summary: Get platform-wide usage and performance metrics
+      description: Returns aggregate metrics for judges — total sessions, messages, safety rates, RAG usage, average response latency, and Azure service counts.
+      responses:
+        "200":
+          description: Dashboard metrics
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MetricsDashboard"
+
+  /lab-sessions/{id}/audit:
+    get:
+      operationId: getSessionAuditLog
+      tags: [audit]
+      summary: Get audit log for a lab session
+      description: Returns all audit events for all conversations in a session, read from the dedicated audit_events table.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Session audit log
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SessionAuditLog"
+        "400":
+          description: Invalid session ID
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Session not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+components:
+  schemas:
+    ProtocolTemplate:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique template identifier
+        domain:
+          type: string
+          description: Scientific domain of the template
+        name:
+          type: string
+          description: Display name of the template
+        description:
+          type: string
+          description: Detailed description of the protocol
+        icon:
+          type: string
+          description: Emoji icon for the template
+        tags:
+          type: array
+          items:
+            type: string
+          description: Keywords for filtering templates
+        starterPrompt:
+          type: string
+          description: Pre-filled first message to seed the AI conversation with relevant context
+      required:
+        - id
+        - domain
+        - name
+        - description
+        - icon
+        - tags
+        - starterPrompt
+
+    PaperOutline:
+      type: object
+      properties:
+        introduction:
+          type: string
+          description: Full draft Introduction section
+        methods:
+          type: string
+          description: Condensed methods summary for the outline
+        results:
+          type: string
+          description: Draft Results section framework
+        discussion:
+          type: string
+          description: Draft Discussion section
+        conclusion:
+          type: string
+          description: Draft Conclusion section
+      required:
+        - introduction
+        - methods
+        - results
+        - discussion
+        - conclusion
+
+    PaperDraft:
+      type: object
+      properties:
+        abstract:
+          type: string
+          description: Concise 150-250 word abstract
+        materialsAndMethods:
+          type: string
+          description: Complete, publication-ready Materials and Methods section
+        outline:
+          $ref: "#/components/schemas/PaperOutline"
+        sessionName:
+          type: string
+          description: Name of the lab session
+        domain:
+          type: string
+          description: Scientific domain of the session
+        generatedAt:
+          type: string
+          format: date-time
+          description: Timestamp when the draft was generated
+      required:
+        - abstract
+        - materialsAndMethods
+        - outline
+        - sessionName
+        - domain
+        - generatedAt
+
+    Hypothesis:
+      type: object
+      properties:
+        text:
+          type: string
+          description: Testable scientific hypothesis in H1 form
+        confidence:
+          type: string
+          enum: [high, medium, low]
+          description: Confidence level based on data support
+        reasoning:
+          type: string
+          description: "Reasoning chain: because X, we hypothesize Y, predicting Z"
+      required:
+        - text
+        - confidence
+        - reasoning
+
+    NextExperiment:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Descriptive name for the follow-up experiment
+        rationale:
+          type: string
+          description: Why this experiment would advance understanding
+        parameters:
+          type: string
+          description: Key variables, controls, and measurement approach
+      required:
+        - title
+        - rationale
+        - parameters
+
+    AnalysisResult:
+      type: object
+      properties:
+        findings:
+          type: array
+          items:
+            type: string
+          description: Key observations extracted from the experimental data
+        hypotheses:
+          type: array
+          items:
+            $ref: "#/components/schemas/Hypothesis"
+          description: Testable hypotheses with confidence levels
+        nextExperiments:
+          type: array
+          items:
+            $ref: "#/components/schemas/NextExperiment"
+          description: Concrete follow-up experiment suggestions
+        domain:
+          type: string
+          description: Scientific domain of the session
+        generatedAt:
+          type: string
+          format: date-time
+          description: Timestamp when the analysis was generated
+      required:
+        - findings
+        - hypotheses
+        - nextExperiments
+        - domain
+        - generatedAt
+
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+      required:
+        - status
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+      required:
+        - error
+
+    CsvColumnStats:
+      type: object
+      properties:
+        min:
+          type: number
+        max:
+          type: number
+        mean:
+          type: number
+      required:
+        - min
+        - max
+        - mean
+
+    SampleDatasetMeta:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        domain:
+          type: string
+        rowCount:
+          type: integer
+        columns:
+          type: array
+          items:
+            type: string
+      required:
+        - id
+        - name
+        - description
+        - domain
+        - rowCount
+        - columns
+
+    VisionObject:
+      type: object
+      properties:
+        name:
+          type: string
+        confidence:
+          type: number
+      required:
+        - name
+        - confidence
+
+    VisionAnalysis:
+      type: object
+      properties:
+        available:
+          type: boolean
+        caption:
+          type: string
+        captionConfidence:
+          type: number
+        ocrText:
+          type: string
+        objects:
+          type: array
+          items:
+            $ref: "#/components/schemas/VisionObject"
+        analyzedAt:
+          type: string
+        error:
+          type: string
+      required:
+        - available
+        - analyzedAt
+
+    UploadSummary:
+      type: object
+      properties:
+        columns:
+          type: array
+          items:
+            type: string
+        numericColumns:
+          type: array
+          items:
+            type: string
+        rowCount:
+          type: integer
+        stats:
+          type: object
+          additionalProperties:
+            $ref: "#/components/schemas/CsvColumnStats"
+        filename:
+          type: string
+        mimeType:
+          type: string
+        visionAnalysis:
+          $ref: "#/components/schemas/VisionAnalysis"
+
+    UploadResult:
+      type: object
+      properties:
+        uploadType:
+          type: string
+          enum: [csv, image]
+        summary:
+          $ref: "#/components/schemas/UploadSummary"
+        session:
+          $ref: "#/components/schemas/LabSession"
+      required:
+        - uploadType
+        - summary
+
+    LoadSampleBody:
+      type: object
+      properties:
+        datasetId:
+          type: string
+      required:
+        - datasetId
+
+    LabSession:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        domain:
+          type: string
+        experimentData:
+          type: object
+          nullable: true
+          description: Parsed CSV data or image data attached to the session
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - name
+        - description
+        - domain
+        - createdAt
+        - updatedAt
+
+    CreateLabSessionBody:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        domain:
+          type: string
+      required:
+        - name
+
+    OpenaiConversation:
+      type: object
+      properties:
+        id:
+          type: integer
+        sessionId:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - sessionId
+        - createdAt
+
+    SafetyCategory:
+      type: object
+      properties:
+        category:
+          type: string
+        severity:
+          type: number
+      required:
+        - category
+        - severity
+
+    SafetyMetadata:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [passed, flagged, blocked, unavailable]
+        categories:
+          type: array
+          items:
+            $ref: "#/components/schemas/SafetyCategory"
+        blockedCategories:
+          type: array
+          items:
+            type: string
+        flaggedCategories:
+          type: array
+          items:
+            type: string
+        available:
+          type: boolean
+        checkedAt:
+          type: string
+      required:
+        - status
+        - categories
+        - blockedCategories
+        - flaggedCategories
+        - available
+        - checkedAt
+
+    RagChunkRef:
+      type: object
+      properties:
+        sourceFile:
+          type: string
+        pageNumber:
+          type: integer
+        score:
+          type: number
+        chunkIndex:
+          type: integer
+        excerpt:
+          type: string
+          nullable: true
+      required:
+        - sourceFile
+        - pageNumber
+        - score
+
+    GroundednessResult:
+      type: object
+      properties:
+        score:
+          type: number
+          description: Groundedness score 0-1 from LLM-as-judge evaluator
+        justification:
+          type: string
+          description: Natural language justification from the evaluator
+        evaluatedAt:
+          type: string
+      required:
+        - score
+        - justification
+
+    OpenaiMessage:
+      type: object
+      properties:
+        id:
+          type: integer
+        conversationId:
+          type: integer
+        role:
+          type: string
+        content:
+          type: string
+        safetyMetadata:
+          $ref: "#/components/schemas/SafetyMetadata"
+        groundednessScore:
+          type: number
+          nullable: true
+          description: LLM-as-judge groundedness score 0-1 (assistant messages only)
+        groundednessJustification:
+          type: string
+          nullable: true
+          description: Evaluator justification text for the groundedness score
+        ragChunkRefs:
+          type: array
+          nullable: true
+          items:
+            $ref: "#/components/schemas/RagChunkRef"
+          description: RAG chunks retrieved to generate this response
+        modelDeployment:
+          type: string
+          nullable: true
+          description: Azure OpenAI model deployment name used to generate this response
+        createdAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - conversationId
+        - role
+        - content
+        - createdAt
+
+    CreateOpenaiConversationBody:
+      type: object
+      properties:
+        sessionId:
+          type: integer
+      required:
+        - sessionId
+
+    SendOpenaiMessageBody:
+      type: object
+      properties:
+        content:
+          type: string
+        sessionContext:
+          type: string
+          description: Optional context about the current lab session
+      required:
+        - content
+
+    OpenaiConversationWithMessages:
+      type: object
+      properties:
+        id:
+          type: integer
+        sessionId:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+        messages:
+          type: array
+          items:
+            $ref: "#/components/schemas/OpenaiMessage"
+      required:
+        - id
+        - sessionId
+        - createdAt
+        - messages
+
+    OpenaiError:
+      type: object
+      properties:
+        error:
+          type: string
+      required:
+        - error
+
+    AzureServiceStatus:
+      type: object
+      properties:
+        configured:
+          type: boolean
+        health:
+          type: string
+          enum: [healthy, error, unconfigured]
+      required:
+        - configured
+        - health
+
+    AzureStatus:
+      type: object
+      properties:
+        contentSafety:
+          $ref: "#/components/schemas/AzureServiceStatus"
+        vision:
+          $ref: "#/components/schemas/AzureServiceStatus"
+        checkedAt:
+          type: string
+      required:
+        - contentSafety
+        - vision
+        - checkedAt
+
+    EvaluationSummary:
+      type: object
+      description: Aggregated evaluation metrics across all sessions
+      properties:
+        totalMessages:
+          type: integer
+        safetyCheckedCount:
+          type: integer
+        flaggedCount:
+          type: integer
+        blockedCount:
+          type: integer
+        passedCount:
+          type: integer
+        avgGroundedness:
+          type: number
+          nullable: true
+          description: Average groundedness score 0-1 across all evaluated messages
+        groundednessEvaluatedCount:
+          type: integer
+        generatedAt:
+          type: string
+          format: date-time
+      required:
+        - totalMessages
+        - safetyCheckedCount
+        - flaggedCount
+        - blockedCount
+        - passedCount
+        - groundednessEvaluatedCount
+        - generatedAt
+
+    MessageEvaluationEntry:
+      type: object
+      description: Per-message evaluation details in a session report
+      properties:
+        messageId:
+          type: integer
+        role:
+          type: string
+        contentPreview:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        safety:
+          $ref: "#/components/schemas/SafetyMetadata"
+          nullable: true
+        groundednessScore:
+          type: number
+          nullable: true
+        groundednessJustification:
+          type: string
+          nullable: true
+        ragChunkRefs:
+          type: array
+          nullable: true
+          items:
+            $ref: "#/components/schemas/RagChunkRef"
+        modelDeployment:
+          type: string
+          nullable: true
+      required:
+        - messageId
+        - role
+        - contentPreview
+        - createdAt
+
+    EvaluationReport:
+      type: object
+      description: Per-session evaluation report with per-message breakdown
+      properties:
+        sessionId:
+          type: integer
+        sessionName:
+          type: string
+        domain:
+          type: string
+        totalMessages:
+          type: integer
+        assistantMessages:
+          type: integer
+        avgGroundedness:
+          type: number
+          nullable: true
+        groundednessEvaluatedCount:
+          type: integer
+        safetyFlagRate:
+          type: number
+          nullable: true
+        flaggedCount:
+          type: integer
+        safetyCheckedCount:
+          type: integer
+        messages:
+          type: array
+          items:
+            $ref: "#/components/schemas/MessageEvaluationEntry"
+        generatedAt:
+          type: string
+          format: date-time
+      required:
+        - sessionId
+        - sessionName
+        - domain
+        - totalMessages
+        - assistantMessages
+        - groundednessEvaluatedCount
+        - messages
+        - generatedAt
+
+    MetricsDashboard:
+      type: object
+      description: Platform-wide usage and performance metrics for the hackathon judges
+      properties:
+        totalSessions:
+          type: integer
+        totalConversations:
+          type: integer
+        totalMessages:
+          type: integer
+        assistantMessages:
+          type: integer
+        safetyCheckedCount:
+          type: integer
+        safetyPassedCount:
+          type: integer
+        safetyFlaggedCount:
+          type: integer
+        safetyBlockedCount:
+          type: integer
+        safetyPassRate:
+          type: number
+          nullable: true
+        avgGroundedness:
+          type: number
+          nullable: true
+        groundednessEvaluatedCount:
+          type: integer
+        ragEnabledMessages:
+          type: integer
+        openmlImports:
+          type: integer
+        azureServicesActive:
+          type: integer
+        azureServicesTotal:
+          type: integer
+        generatedAt:
+          type: string
+          format: date-time
+      required:
+        - totalSessions
+        - totalConversations
+        - totalMessages
+        - assistantMessages
+        - safetyCheckedCount
+        - safetyPassedCount
+        - safetyFlaggedCount
+        - safetyBlockedCount
+        - groundednessEvaluatedCount
+        - ragEnabledMessages
+        - openmlImports
+        - azureServicesActive
+        - azureServicesTotal
+        - generatedAt
+
+    AuditEventSafety:
+      type: object
+      description: Safety metadata embedded in an audit event
+      properties:
+        status:
+          type: string
+          enum: [passed, flagged, blocked, unavailable]
+        available:
+          type: boolean
+        checkedAt:
+          type: string
+        categories:
+          type: array
+          items:
+            $ref: "#/components/schemas/SafetyCategory"
+        blockedCategories:
+          type: array
+          items:
+            type: string
+        flaggedCategories:
+          type: array
+          items:
+            type: string
+      required:
+        - status
+        - available
+        - checkedAt
+        - categories
+        - blockedCategories
+        - flaggedCategories
+
+    AuditEvent:
+      type: object
+      description: A single persisted audit event from the audit_events table
+      properties:
+        messageId:
+          type: integer
+        role:
+          type: string
+        sessionId:
+          type: integer
+        userId:
+          type: integer
+          nullable: true
+        query:
+          type: string
+          nullable: true
+          description: The user query that triggered this assistant response
+        contentPreview:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        safety:
+          $ref: "#/components/schemas/AuditEventSafety"
+        groundednessScore:
+          type: number
+          nullable: true
+        groundednessJustification:
+          type: string
+          nullable: true
+        ragChunkRefs:
+          type: array
+          nullable: true
+          items:
+            $ref: "#/components/schemas/RagChunkRef"
+        modelDeployment:
+          type: string
+          nullable: true
+      required:
+        - messageId
+        - role
+        - sessionId
+        - contentPreview
+        - safety
+
+    AuditSummary:
+      type: object
+      properties:
+        checkedCount:
+          type: integer
+        blockedCount:
+          type: integer
+        flaggedCount:
+          type: integer
+        passedCount:
+          type: integer
+        avgGroundedness:
+          type: number
+          nullable: true
+        groundednessEvaluatedCount:
+          type: integer
+      required:
+        - checkedCount
+        - blockedCount
+        - flaggedCount
+        - passedCount
+        - groundednessEvaluatedCount
+
+    SessionAuditLog:
+      type: object
+      description: Full audit log for a lab session
+      properties:
+        sessionId:
+          type: integer
+        sessionName:
+          type: string
+        domain:
+          type: string
+        totalMessages:
+          type: integer
+        summary:
+          $ref: "#/components/schemas/AuditSummary"
+        events:
+          type: array
+          items:
+            $ref: "#/components/schemas/AuditEvent"
+      required:
+        - sessionId
+        - sessionName
+        - domain
+        - totalMessages
+        - summary
+        - events

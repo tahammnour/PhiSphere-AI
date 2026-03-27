@@ -1,0 +1,17 @@
+# PhiSphere AI — Notebook Dependencies
+# Install: pip install -r notebooks/requirements.txt
+
+# Azure ML SDK v2 (experiment tracking, dataset registration)
+azure-ai-ml
+azure-identity
+mlflow
+
+# Responsible AI Toolbox (fairness, error analysis, data balance)
+raiwidgets
+responsibleai
+
+# Data science
+pandas
+numpy
+scikit-learn
+matplotlib

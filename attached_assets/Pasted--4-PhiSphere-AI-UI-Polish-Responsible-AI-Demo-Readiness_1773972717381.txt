@@ -1,0 +1,36 @@
+#4 - PhiSphere AI — UI Polish, Responsible AI & Demo Readiness
+What & Why
+Make PhiSphere AI demo-ready and competition-winning. This covers: a polished professional design with the PhiSphere brand identity, a Responsible AI dashboard panel (showing model confidence, explainability metrics, fairness indicators inspired by Microsoft's Responsible AI Toolbox), pre-loaded demo experiments so judges can instantly see the app working without uploading anything, and an architecture overview page suitable for the hackathon video and presentation.
+
+Done looks like
+The app looks professional and distinct — "PhiSphere AI" branding throughout, with a dark scientific aesthetic (deep navy/teal palette, clean typography, subtle molecular/scientific motifs)
+A "Responsible AI" tab or panel is accessible from the main interface showing: confidence score for last AI response, safety check summary, "Why I said this" explanation, and a note crediting the Microsoft Responsible AI Toolbox principles
+Three pre-built demo experiments are available with one click: (1) "Plant Sensor Analysis" using an OpenML dataset CSV, (2) "Chemical Reaction Protocol Review" using text input, (3) "Lab Image Analysis" using a sample gel image. Each demo experiment pre-populates the session with realistic researcher questions and AI responses
+An "About PhiSphere AI" page or modal describes the architecture: Azure Content Safety + Azure AI Vision + GPT-5.2 + Responsible AI principles — formatted like a mini pitch deck slide for the demo video
+All forms have validation, errors are shown clearly, loading states exist throughout, and the app handles the case where Azure keys are not configured (graceful degradation with a notice)
+The app is fully responsive and looks good at 1280px width (judge will likely view on a laptop)
+A "How it works" onboarding tooltip tour guides first-time users through the 5 key features
+Out of scope
+Mobile responsive design (desktop-first for hackathon)
+Multi-user collaboration
+Export to PDF report (future feature)
+Tasks
+Brand identity and design system — Define the PhiSphere AI color palette (deep navy #0A1628, teal accent #00C9B1, white, light gray), typography (Inter for UI, JetBrains Mono for data/code), and icon set. Apply consistently across all pages and components.
+
+Responsible AI panel — Build a collapsible side panel or tab titled "Responsible AI Insights" that displays: (a) Confidence indicator (Low/Medium/High based on response length and uncertainty language detection), (b) Safety check result summary from Azure Content Safety, (c) "Reasoning trace" expanding the AI's step-by-step logic, (d) "Data grounding" showing which uploaded data points were referenced. Credit Microsoft Responsible AI Toolbox principles in the panel footer.
+
+Demo experiments — Create three pre-built demo sessions in the database seed (or load on first run): Plant Sensor (CSV with temperature/humidity/growth columns from OpenML), Chemical Protocol (text protocol for a standard titration experiment), and Lab Image (a placeholder scientific graph image). Each session has 2-3 pre-written messages demonstrating the AI reasoning format.
+
+Architecture overview page — Build a /about route with a visually appealing architecture diagram (using SVG or a simple React component) showing the data flow: User → PhiSphere AI Frontend → Express API → [Azure Content Safety] → [GPT-5.2] → [Azure AI Vision] → Response. Include the Azure services logos/badges and the Responsible AI Toolbox badge.
+
+Onboarding tour — Add a first-visit tooltip tour (using a lightweight library like react-joyride or custom tooltips) that highlights: New Session button, File Upload area, Sample Datasets, Safety Badge, and Responsible AI panel. Skippable with one click.
+
+Error handling and graceful degradation — If Azure Content Safety key is missing, show a banner "Safety checks temporarily unavailable" and continue with AI responses. If Azure Vision key is missing, show "Image enrichment unavailable, proceeding with standard analysis." No hard crashes.
+
+Loading states and micro-animations — Add skeleton loaders for message list, a typing indicator while AI streams, smooth transitions between sessions, and a subtle progress animation on file upload. Makes the demo feel polished and complete.
+
+Relevant files
+artifacts/api-server/src/routes/index.ts
+lib/api-spec/openapi.yaml
+lib/db/src/schema/index.ts
+Dependencies

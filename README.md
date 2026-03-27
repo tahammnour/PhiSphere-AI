@@ -62,6 +62,7 @@ Project walkthroughs (files in [`videos/`](videos/)). **Inline player** below, p
 | | |
 |:---|:---|
 | Authors | [`AUTHORS.md`](AUTHORS.md) — maintainer contact |
+| **Presentation (slides)** | [`PhiSphere_AI_Presentation.pptx`](https://github.com/tahammnour/PhiSphere-AI/blob/main/PhiSphere_AI_Presentation.pptx) — download / open on GitHub |
 | Judges guide | [`JUDGES_GUIDE.md`](JUDGES_GUIDE.md) — evaluation path & technical evidence |
 | Submission | [`HACKATHON_SUBMISSION_CHECKLIST.md`](HACKATHON_SUBMISSION_CHECKLIST.md) |
 | Backend | [`artifacts/api-server/README.md`](artifacts/api-server/README.md) |
@@ -69,6 +70,14 @@ Project walkthroughs (files in [`videos/`](videos/)). **Inline player** below, p
 | API routes | [`artifacts/api-server/src/routes/README.md`](artifacts/api-server/src/routes/README.md) |
 | Shared libs | [`lib/README.md`](lib/README.md) |
 | Notebooks | [`notebooks/README.md`](notebooks/README.md) |
+
+---
+
+## 📊 Presentations
+
+| Resource | Link |
+|----------|------|
+| **PhiSphere AI — slide deck** | [PhiSphere_AI_Presentation.pptx](https://github.com/tahammnour/PhiSphere-AI/blob/main/PhiSphere_AI_Presentation.pptx) (PowerPoint in repo root — use **Download raw** on GitHub to open locally) |
 
 ---
 
@@ -615,6 +624,7 @@ PhiSphere applies responsible AI across the stack:
 
 | | |
 |:---|:---|
+| **Repository owner & contributor** | **[Taha Nour El-Dein](https://github.com/tahammnour)** — [@tahammnour](https://github.com/tahammnour) |
 | **Contact** | [mrzedd@outlook.sa](mailto:mrzedd@outlook.sa) |
 | **Live deployment** | [phi-sphere-ai-from-labs-last.replit.app](https://phi-sphere-ai-from-labs-last.replit.app) — hosted on [Replit](https://replit.com) |
 | **Replit** | Cloud IDE, deployment, and project hosting |

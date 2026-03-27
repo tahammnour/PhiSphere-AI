@@ -13,6 +13,18 @@
   — <code>phi-sphere-ai-from-labs-last.replit.app</code>
 </p>
 
+### Demo login (hosted app)
+
+For judges and reviewers evaluating the live deployment at [phi-sphere-ai-from-labs-last.replit.app](https://phi-sphere-ai-from-labs-last.replit.app/):
+
+| Field | Value |
+|------|--------|
+| **URL** | https://phi-sphere-ai-from-labs-last.replit.app/ |
+| **Username** | `tahammnour` |
+| **Password** | `10020033` |
+
+> This account is for **demo / judging only**. Anyone can see these credentials in a public repo — use a **dedicated demo user**, avoid real personal passwords, and **change or remove** this account after the event if needed.
+
 ---
 
 ## 🎬 Intro videos

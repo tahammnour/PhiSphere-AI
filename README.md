@@ -15,25 +15,31 @@
 
 ## 🎬 Intro videos
 
-Two short walkthroughs (files in [`videos/`](videos/)). On GitHub, playback uses **`raw.githubusercontent.com`** URLs:
+Project walkthroughs (files in [`videos/`](videos/)). **Inline player** below, plus **open on GitHub** if the player does not load (GitHub’s file page has a native player).
 
 ### Intro 1
 
-<video controls playsinline muted width="100%">
-  <source src="https://raw.githubusercontent.com/tahammnour/PhiSphere-AI/main/videos/intro1.mp4" type="video/mp4" />
-</video>
+<p align="center">
+  <a href="https://github.com/tahammnour/PhiSphere-AI/blob/main/videos/intro1.mp4"><strong>▶ Watch Intro 1 on GitHub</strong></a>
+</p>
 
-**Also:** [Open `intro1.mp4` on GitHub](https://github.com/tahammnour/PhiSphere-AI/blob/main/videos/intro1.mp4) · [Raw file](https://raw.githubusercontent.com/tahammnour/PhiSphere-AI/main/videos/intro1.mp4)
+<video controls playsinline width="100%" poster="https://raw.githubusercontent.com/tahammnour/PhiSphere-AI/main/assets/phisphere-logo.png">
+  <source src="https://raw.githubusercontent.com/tahammnour/PhiSphere-AI/main/videos/intro1.mp4" type="video/mp4" />
+  <source src="videos/intro1.mp4" type="video/mp4" />
+</video>
 
 ### Intro 2
 
-<video controls playsinline muted width="100%">
+<p align="center">
+  <a href="https://github.com/tahammnour/PhiSphere-AI/blob/main/videos/intro2.mp4"><strong>▶ Watch Intro 2 on GitHub</strong></a>
+</p>
+
+<video controls playsinline width="100%" poster="https://raw.githubusercontent.com/tahammnour/PhiSphere-AI/main/assets/phisphere-logo.png">
   <source src="https://raw.githubusercontent.com/tahammnour/PhiSphere-AI/main/videos/intro2.mp4" type="video/mp4" />
+  <source src="videos/intro2.mp4" type="video/mp4" />
 </video>
 
-**Also:** [Open `intro2.mp4` on GitHub](https://github.com/tahammnour/PhiSphere-AI/blob/main/videos/intro2.mp4) · [Raw file](https://raw.githubusercontent.com/tahammnour/PhiSphere-AI/main/videos/intro2.mp4)
-
-If the players above are empty, confirm you are on the **`main`** branch and that the MP4s are committed. You can also open them locally from the `videos/` folder.
+**Direct download:** [intro1.mp4](https://raw.githubusercontent.com/tahammnour/PhiSphere-AI/main/videos/intro1.mp4) · [intro2.mp4](https://raw.githubusercontent.com/tahammnour/PhiSphere-AI/main/videos/intro2.mp4)
 
 ---
 
@@ -41,7 +47,7 @@ If the players above are empty, confirm you are on the **`main`** branch and tha
 
 | | |
 |:---|:---|
-| Judges guide | [`JUDGES_GUIDE.md`](JUDGES_GUIDE.md) — quick evaluation path & **demo video storyboard** |
+| Judges guide | [`JUDGES_GUIDE.md`](JUDGES_GUIDE.md) — evaluation path & technical evidence |
 | Submission | [`HACKATHON_SUBMISSION_CHECKLIST.md`](HACKATHON_SUBMISSION_CHECKLIST.md) |
 | Backend | [`artifacts/api-server/README.md`](artifacts/api-server/README.md) |
 | Frontend | [`artifacts/phisphere-ai/README.md`](artifacts/phisphere-ai/README.md) |
@@ -53,28 +59,28 @@ If the players above are empty, confirm you are on the **`main`** branch and tha
 
 ## 📸 Screenshots & diagrams
 
-### Architecture assets (committed — render on GitHub)
+### Architecture assets (in repo)
 
-| Preview | Description |
-|--------|-------------|
-| ![Azure architecture overview](https://raw.githubusercontent.com/tahammnour/PhiSphere-AI/main/screenshots/architecture-phisphere-azure.png) | **Azure architecture** — Full stack: User → React UI → Backend → 8 Azure services → PostgreSQL |
-| ![Six architecture panels](https://raw.githubusercontent.com/tahammnour/PhiSphere-AI/main/screenshots/architecture-diagrams-collage.png) | **Six-panel collage** — High-level stack, RAG sequence, safety pipeline, document RAG, Azure map, multimodal inputs |
-| ![Drawing style guide](https://raw.githubusercontent.com/tahammnour/PhiSphere-AI/main/screenshots/architecture-drawing-style-guide.png) | **Style guide** — Layout, box colors, arrows, Azure palette (for draw.io / slides) |
+| Description |
+|-------------|
+| ![Azure architecture overview](https://raw.githubusercontent.com/tahammnour/PhiSphere-AI/main/screenshots/architecture-phisphere-azure.png)<br/><br/>**System overview** — User → React UI → Backend → 8 Azure services → PostgreSQL. |
+| ![Six architecture panels](https://raw.githubusercontent.com/tahammnour/PhiSphere-AI/main/screenshots/architecture-diagrams-collage.png)<br/><br/>**Six-panel collage** — High-level stack, RAG sequence, safety pipeline, document RAG, Azure map, multimodal inputs. |
+| ![Drawing style guide](https://raw.githubusercontent.com/tahammnour/PhiSphere-AI/main/screenshots/architecture-drawing-style-guide.png)<br/><br/>**Style guide** — Layout, box colors, arrows, and Azure palette (for draw.io / slides). |
 
 ### UI captures (optional)
 
-Add these PNGs under `screenshots/` when you record the demo (filenames are suggestions):
+Add PNGs under `screenshots/` when you record the app (suggested filenames in parentheses):
 
-| Target file | What to capture |
-|---------------|-----------------|
-| `screenshots/landing.png` | Landing — hero, feature cards, pricing |
-| `screenshots/control-panel.png` | Control Panel — Azure status dots, metrics |
-| `screenshots/lab-notebook.png` | Lab notebook — chat, CSV chart, RAI panel |
-| `screenshots/ai-vision.png` | Image upload + Vision analysis |
-| `screenshots/rag-pipeline.png` | PDF upload + RAG / citations |
-| `screenshots/safety-demo.png` | Content Safety block + audit |
-| `screenshots/metrics.png` | Metrics / evaluation summary |
-| `screenshots/about.png` | About page in the app |
+| Description |
+|-------------|
+| **Landing** (`landing.png`) — Hero, feature cards, pricing |
+| **Control Panel** (`control-panel.png`) — Azure status, metrics, sessions |
+| **Lab notebook** (`lab-notebook.png`) — Chat, CSV chart, RAI panel |
+| **Vision** (`ai-vision.png`) — Image upload + analysis |
+| **RAG** (`rag-pipeline.png`) — PDF upload + citations |
+| **Safety** (`safety-demo.png`) — Content Safety + audit |
+| **Metrics** (`metrics.png`) — Evaluation summary |
+| **About** (`about.png`) — In-app About page |
 
 <details>
 <summary>How to capture UI screenshots</summary>
@@ -557,8 +563,6 @@ Copy `.env.example` or set these in your environment / Replit Secrets:
 | `APPLICATIONINSIGHTS_CONNECTION_STRING` | Optional | App Insights connection string |
 
 See [replit.md](replit.md) for the full environment variable reference.
-
-> **Demo video & judging:** Step-by-step **3‑minute demo path** and the full **15‑shot video storyboard** live in [`JUDGES_GUIDE.md`](JUDGES_GUIDE.md) so this README stays focused on the product and setup. Use that file when recording or presenting.
 
 ---
 

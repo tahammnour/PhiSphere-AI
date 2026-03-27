@@ -5,24 +5,32 @@
 Built for the **Microsoft Innovation Challenge — March 2026 Hackathon**.
 
 <p align="center">
-  <img src="assets/phisphere-logo.png" alt="PhiSphere AI — sapphire-blue sphere mark and wordmark" width="520" />
+  <img src="https://raw.githubusercontent.com/tahammnour/PhiSphere-AI/main/assets/phisphere-logo.png" alt="PhiSphere AI — sapphire-blue sphere mark and wordmark" width="520" />
 </p>
 
 ---
 
 ## Intro videos
 
-Two short walkthroughs you can play directly on GitHub once the files are in `videos/`:
+Two short walkthroughs (files live in [`videos/`](videos/)). GitHub renders video best with **absolute** `raw.githubusercontent.com` URLs:
 
 ### Intro 1
 
-<video src="videos/intro1.mp4" controls playsinline width="100%"></video>
+<video controls playsinline muted width="100%">
+  <source src="https://raw.githubusercontent.com/tahammnour/PhiSphere-AI/main/videos/intro1.mp4" type="video/mp4" />
+</video>
+
+**Also:** [Open `intro1.mp4` on GitHub](https://github.com/tahammnour/PhiSphere-AI/blob/main/videos/intro1.mp4) · [Raw file](https://raw.githubusercontent.com/tahammnour/PhiSphere-AI/main/videos/intro1.mp4)
 
 ### Intro 2
 
-<video src="videos/intro2.mp4" controls playsinline width="100%"></video>
+<video controls playsinline muted width="100%">
+  <source src="https://raw.githubusercontent.com/tahammnour/PhiSphere-AI/main/videos/intro2.mp4" type="video/mp4" />
+</video>
 
-If playback fails locally, open `videos/intro1.mp4` and `videos/intro2.mp4` in your player, or ensure both files are committed next to this README.
+**Also:** [Open `intro2.mp4` on GitHub](https://github.com/tahammnour/PhiSphere-AI/blob/main/videos/intro2.mp4) · [Raw file](https://raw.githubusercontent.com/tahammnour/PhiSphere-AI/main/videos/intro2.mp4)
+
+If the players above are empty, confirm you are on the **`main`** branch and that these files exist in the repo. Clone locally and open the MP4s in your player if needed.
 
 ---
 
@@ -40,28 +48,35 @@ If playback fails locally, open `videos/intro1.mp4` and `videos/intro2.mp4` in y
 
 ## Screenshots
 
-> **Note:** Replace the placeholder descriptions below with actual screenshots from a running instance.
+### Architecture & diagrams (in repo — these render on GitHub)
 
-| Screen | Description |
+| Preview | Description |
 |--------|-------------|
-| ![Landing Page](screenshots/landing.png) | **Landing Page** — Hero section with feature cards, pricing tiers, and Azure-powered branding |
-| ![Control Panel](screenshots/control-panel.png) | **Control Panel** — Dashboard with live Azure service status (8 green dots), usage metrics, and recent sessions |
-| ![Lab Notebook](screenshots/lab-notebook.png) | **Lab Notebook** — Chat interface with structured AI responses (Observation → Analysis → Next Steps), CSV chart, and RAI panel |
-| ![AI Vision](screenshots/ai-vision.png) | **Image Analysis** — Gel electrophoresis photo analyzed by Azure AI Vision with captions and OCR |
-| ![RAG Pipeline](screenshots/rag-pipeline.png) | **PDF RAG** — Document Intelligence extraction → AI Search indexing → citation chips in follow-up chat |
-| ![Safety Demo](screenshots/safety-demo.png) | **Content Safety** — Blocked response with safety metadata and audit log entry |
-| ![Metrics Dashboard](screenshots/metrics.png) | **Metrics Dashboard** — Safety pass rate, groundedness scores, RAG usage, and Azure service health |
-| ![About & Architecture](screenshots/about.png) | **About Page** — System architecture diagram showing all 8 Azure services and Responsible AI principles |
-| ![Azure Architecture](screenshots/architecture-phisphere-azure.png) | **Azure Architecture Diagram** — Full cloud architecture (committed PNG; see Architecture section for collage + style guide) |
+| ![Azure architecture overview](https://raw.githubusercontent.com/tahammnour/PhiSphere-AI/main/screenshots/architecture-phisphere-azure.png) | **Azure architecture** — Full stack: User → React UI → Backend → 8 Azure services → PostgreSQL |
+| ![Six architecture panels](https://raw.githubusercontent.com/tahammnour/PhiSphere-AI/main/screenshots/architecture-diagrams-collage.png) | **Six-panel collage** — High-level stack, RAG sequence, safety pipeline, document RAG, Azure map, multimodal inputs |
+| ![Drawing style guide](https://raw.githubusercontent.com/tahammnour/PhiSphere-AI/main/screenshots/architecture-drawing-style-guide.png) | **Style guide** — Layout, box colors, arrows, Azure palette (for draw.io / slides) |
+
+### UI captures (optional — add PNGs to `screenshots/` when you record the demo)
+
+These filenames are **not** committed yet; add them to avoid broken images:
+
+| Target file | What to capture |
+|---------------|-----------------|
+| `screenshots/landing.png` | Landing — hero, feature cards, pricing |
+| `screenshots/control-panel.png` | Control Panel — Azure status dots, metrics |
+| `screenshots/lab-notebook.png` | Lab notebook — chat, CSV chart, RAI panel |
+| `screenshots/ai-vision.png` | Image upload + Vision analysis |
+| `screenshots/rag-pipeline.png` | PDF upload + RAG / citations |
+| `screenshots/safety-demo.png` | Content Safety block + audit |
+| `screenshots/metrics.png` | Metrics / evaluation summary |
+| `screenshots/about.png` | About page in the app |
 
 <details>
 <summary>How to capture UI screenshots</summary>
 
-1. Start the app locally or on Replit
-2. Navigate to each screen listed above (except architecture PNGs, which are already in `screenshots/`)
-3. Take a screenshot (e.g., browser DevTools device toolbar at 1280×800)
-4. Save images to the `screenshots/` folder at the repo root
-5. Commit the folder — the table above will render automatically on GitHub
+1. Run the app locally or on Replit.
+2. Capture each screen and save under `screenshots/` using the filenames above.
+3. Commit and push — then you can switch this section back to image markdown if you prefer a gallery table.
 
 </details>
 
@@ -81,16 +96,16 @@ These PNGs are **better than placeholders** for judges and slides: they show the
 
 **System overview — PhiSphere AI Lab Assistant (multimodal + explainable AI)**
 
-![PhiSphere AI — system overview: User, React UI, Backend pipeline, eight Azure services, PostgreSQL](screenshots/architecture-phisphere-azure.png)
+![PhiSphere AI — system overview: User, React UI, Backend pipeline, eight Azure services, PostgreSQL](https://raw.githubusercontent.com/tahammnour/PhiSphere-AI/main/screenshots/architecture-phisphere-azure.png)
 
 **Six-panel deep dive** (high-level stack, RAG sequence, safety pipeline, document RAG, Azure services map, multimodal inputs)
 
-![Architecture diagrams collage — six panels](screenshots/architecture-diagrams-collage.png)
+![Architecture diagrams collage — six panels](https://raw.githubusercontent.com/tahammnour/PhiSphere-AI/main/screenshots/architecture-diagrams-collage.png)
 
 <details>
 <summary>Drawing style guide (layout, box colors, arrows, Azure palette)</summary>
 
-![Architecture drawing style guide — layout columns, box styles, arrow legend, callouts, hex colors](screenshots/architecture-drawing-style-guide.png)
+![Architecture drawing style guide — layout columns, box styles, arrow legend, callouts, hex colors](https://raw.githubusercontent.com/tahammnour/PhiSphere-AI/main/screenshots/architecture-drawing-style-guide.png)
 
 </details>
 
@@ -600,4 +615,10 @@ PhiSphere AI implements responsible AI principles at every layer:
 
 ## License
 
-MIT
+**MIT** — Copyright (c) 2026 PhiSphere AI.
+
+This project is released under the [MIT License](LICENSE). The full license text is in the [`LICENSE`](LICENSE) file at the repo root (GitHub also shows it under the **MIT license** tab).
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the condition that the above copyright notice and this permission notice appear in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED.

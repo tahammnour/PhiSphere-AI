@@ -70,29 +70,18 @@ Project walkthroughs (files in [`videos/`](videos/)). **Inline player** below, p
 | ![Six architecture panels](https://raw.githubusercontent.com/tahammnour/PhiSphere-AI/main/screenshots/architecture-diagrams-collage.png)<br/><br/>**Six-panel collage** — High-level stack, RAG sequence, safety pipeline, document RAG, Azure map, multimodal inputs. |
 | ![Drawing style guide](https://raw.githubusercontent.com/tahammnour/PhiSphere-AI/main/screenshots/architecture-drawing-style-guide.png)<br/><br/>**Style guide** — Layout, box colors, arrows, and Azure palette (for draw.io / slides). |
 
-### UI captures (optional)
+### Product screenshots (`attached_assets/`)
 
-Add PNGs under `screenshots/` when you record the app (suggested filenames in parentheses):
+Captured from the live PhiSphere AI app (see also [Replit demo](https://phi-sphere-ai-from-labs-last.replit.app)):
 
 | Description |
 |-------------|
-| **Landing** (`landing.png`) — Hero, feature cards, pricing |
-| **Control Panel** (`control-panel.png`) — Azure status, metrics, sessions |
-| **Lab notebook** (`lab-notebook.png`) — Chat, CSV chart, RAI panel |
-| **Vision** (`ai-vision.png`) — Image upload + analysis |
-| **RAG** (`rag-pipeline.png`) — PDF upload + citations |
-| **Safety** (`safety-demo.png`) — Content Safety + audit |
-| **Metrics** (`metrics.png`) — Evaluation summary |
-| **About** (`about.png`) — In-app About page |
+| ![PhiSphere UI — screenshot 1](https://raw.githubusercontent.com/tahammnour/PhiSphere-AI/main/attached_assets/Screenshot_from_2026-03-20_05-40-11_1773978022782.png)<br/><br/>**Session / lab view** — Lab notebook workflow and UI. |
+| ![PhiSphere UI — screenshot 2](https://raw.githubusercontent.com/tahammnour/PhiSphere-AI/main/attached_assets/Screenshot_from_2026-03-20_06-13-24_1773980007419.png)<br/><br/>**Chat & data** — Structured AI response, data, or session context. |
+| ![PhiSphere UI — screenshot 3](https://raw.githubusercontent.com/tahammnour/PhiSphere-AI/main/attached_assets/Screenshot_from_2026-03-20_20-41-16_1774032087249.png)<br/><br/>**Dashboard / insights** — Metrics, Azure status, or evaluation summary. |
+| ![PhiSphere brand asset](https://raw.githubusercontent.com/tahammnour/PhiSphere-AI/main/attached_assets/Logo_with_Translucent_Sapphire-Blue_Spheres_1773973307510.png)<br/><br/>**Brand** — PhiSphere logo (sapphire / blue sphere mark). |
 
-<details>
-<summary>How to capture UI screenshots</summary>
-
-1. Run the app locally or on Replit.
-2. Capture each screen and save under `screenshots/` using the filenames above.
-3. Commit and push — then you can switch this section back to image markdown if you prefer a gallery table.
-
-</details>
+Source files: [`attached_assets/`](attached_assets/).
 
 ---
 

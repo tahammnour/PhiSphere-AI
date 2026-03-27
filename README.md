@@ -49,6 +49,7 @@ Project walkthroughs (files in [`videos/`](videos/)). **Inline player** below, p
 
 | | |
 |:---|:---|
+| Authors | [`AUTHORS.md`](AUTHORS.md) — maintainer contact |
 | Judges guide | [`JUDGES_GUIDE.md`](JUDGES_GUIDE.md) — evaluation path & technical evidence |
 | Submission | [`HACKATHON_SUBMISSION_CHECKLIST.md`](HACKATHON_SUBMISSION_CHECKLIST.md) |
 | Backend | [`artifacts/api-server/README.md`](artifacts/api-server/README.md) |

@@ -624,7 +624,7 @@ PhiSphere applies responsible AI across the stack:
 
 | | |
 |:---|:---|
-| **Repository owner & contributor** | **[Taha Nour El-Dein](https://github.com/tahammnour)** — [@tahammnour](https://github.com/tahammnour) |
+| **Repository owner & contributor** | **[Taha Nour El-Dein](https://github.com/tahammnour)** — [@tahammnour](https://github.com/tahammnour) · [tahammnour@outlook.com](mailto:tahammnour@outlook.com) |
 | **Contact** | [mrzedd@outlook.sa](mailto:mrzedd@outlook.sa) |
 | **Live deployment** | [phi-sphere-ai-from-labs-last.replit.app](https://phi-sphere-ai-from-labs-last.replit.app) — hosted on [Replit](https://replit.com) |
 | **Replit** | Cloud IDE, deployment, and project hosting |
